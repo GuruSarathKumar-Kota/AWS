@@ -26,7 +26,9 @@
 
 When designing a Virtual Private Cloud (VPC) that needs to host 800 instances (servers, containers, or services), a critical step is to calculate the IP address ranges (subnets) and associated port numbers. This ensures the network can scale efficiently while avoiding conflicts and supporting required services.  
 
-This chapter walks through the **logic, tools, and process** for determining the subnet size and port requirements for 800 instances.  
+This chapter walks through the **logic, tools, and process** for determining the subnet size and port requirements for 800 instances. 
+
+
 
 ---
 
@@ -51,6 +53,9 @@ Each subnet requires a certain number of IPs:
 - **Buffer for scaling:** Add ~10% buffer (80 IPs) for growth or unexpected needs.  
 
 **Total required = 800 + 5 (reserved) + 80 (buffer) = 885 IP addresses**  
+
+Below is the reference image
+<img width="1195" height="343" alt="image" src="https://github.com/user-attachments/assets/8c3cb88f-1160-4692-8844-e16cb0b50056" />
 
 ---
 
