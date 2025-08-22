@@ -64,3 +64,47 @@ Cost optimization is part of my regular responsibilities as a DevOps engineer. R
 In another activity, I migrated older **GP2 volumes to GP3**, which reduced cost per GB while improving performance. Beyond EBS, I have also optimized **EC2 instances via rightsizing and scheduling**, and **applied S3 lifecycle rules to move old logs to Glacier**.  
 
 This shows that I not only solve cost issues immediately but also build **automated, long-term solutions** that continuously optimize costs.  
+
+---
+### Sample python snippets
+
+***
+import boto3
+
+ec2 = boto3.client('ec2')
+
+def migrate_gp2_to_gp3():
+    # Fetch all volumes
+    volumes = ec2.describe_volumes()['Volumes']
+    
+    for volume in volumes:
+        if volume['VolumeType'] == 'gp2':
+            volume_id = volume['VolumeId']
+            print(f"Migrating {volume_id} from GP2 to GP3...")
+            ec2.modify_volume(
+                VolumeId=volume_id,
+                VolumeType='gp3'
+            )
+    print("Migration completed!")
+
+migrate_gp2_to_gp3()
+***
+
+***
+import boto3
+
+ec2 = boto3.client('ec2')
+
+def lambda_handler(event, context):
+    # Get all volumes
+    volumes = ec2.describe_volumes(
+        Filters=[{'Name': 'status', 'Values': ['available']}]
+    )
+    
+    for volume in volumes['Volumes']:
+        volume_id = volume['VolumeId']
+        print(f"Deleting unused volume: {volume_id}")
+        ec2.delete_volume(VolumeId=volume_id)
+***
+
+---
